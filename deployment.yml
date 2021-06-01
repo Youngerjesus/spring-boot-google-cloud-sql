@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test
+spec:
+  selector:
+    matchLabels:
+      app: test
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      containers:
+        - name: request
+          image: gcr.io/PROJECT_ID/IMAGE:TAG
+          ports:
+            - containerPort: 8080
