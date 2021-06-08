@@ -1,5 +1,4 @@
 # spring-boot-google-cloud-sql 
-
 ***
 
 ## Usage
