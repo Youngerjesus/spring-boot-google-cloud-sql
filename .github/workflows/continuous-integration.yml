@@ -26,9 +26,23 @@ jobs:
       - name: Verify With Maven
         run: mvn -B verify --file pom.xml
 
+      - name: Check TestCoverage
+        uses: cicirello/jacoco-badge-generator@v2
+        with:
+          generate-branches-badge: true
+          jacoco-csv-file: ./target/site/jacoco/jacoco.csv
+          fail-if-coverage-less-than: 0.9
+
       - name: Build With Docker
         uses: docker/build-push-action@v2
         with:
           context: ./
           file: ./Dockerfile
           push: false
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./target/site/jacoco/jacoco.xml
+

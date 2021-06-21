@@ -18,7 +18,6 @@ public class MemberController {
 
     @PostMapping
     public String createMember(@RequestBody MemberDTO memberDTO){
-
         memberService.addMember(memberDTO);
         return "ok";
     }
